@@ -8,7 +8,8 @@
         "php": "^8.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.5"
+        "livewire/livewire": "^3.5",
+        "spatie/laravel-sitemap": "^7.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -24,10 +25,15 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
+            
         }
-
-
     },
+
+    "exclude-from-classmap": [
+        "vendor/league/flysystem/src/Local/FallbackMimeTypeDetector.php",
+        "vendor/league/flysystem/src/Local/LocalFilesystemAdapter.php",
+        "vendor/laravel/pint/app/Providers/AppServiceProvider.php"
+    ],
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"

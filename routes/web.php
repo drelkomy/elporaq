@@ -20,6 +20,9 @@ use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TrainingController;
 
+use App\Http\Controllers\SitemapController;
+
+Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 
 
 
