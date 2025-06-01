@@ -52,7 +52,7 @@ class InvestmentOpportunityController extends Controller
         $links = Link::all();
         $investmentCategories = InvestmentCategory::all();
         
-        return view('investment-opportunities.allInvest', compact('opportunities', 'categories', 'links', 'investmentCategories','services'));
+        return view('investment-opportunities.allinvest', compact('opportunities', 'categories', 'links', 'investmentCategories','services'));
     }
 
     public function create()

@@ -65,7 +65,7 @@ class BlogController extends Controller
         $links = Link::all();
         $investmentCategories = InvestmentCategory::all();
 
-        return view('blogs.all', compact('blogs', 'categories', 'tags', 'recentPosts', 'links', 'investmentCategories', 'services'));
+        return view('Blogs.all', compact('blogs', 'categories', 'tags', 'recentPosts', 'links', 'investmentCategories', 'services'));
     }
 
 
@@ -77,7 +77,7 @@ class BlogController extends Controller
         $links = Link::all();
         $recentPosts = Blog::latest()->take(5)->get();
         $services=Service::all();
-        return view('blogs.show', compact('blog', 'investmentCategories', 'links', 'recentPosts','services'));
+        return view('Blogs.show', compact('blog', 'investmentCategories', 'links', 'recentPosts','services'));
     }
 
     // عرض نموذج تعديل تدوينة
