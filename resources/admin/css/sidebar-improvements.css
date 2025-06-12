@@ -1,0 +1,133 @@
+/**
+ * Mejoras para el sidebar RTL
+ * Implementa iconos compactos, resaltado de elementos activos y más
+ */
+
+/* Mejoras para el sidebar colapsado */
+.sidebar-collapse .nav-sidebar .nav-link {
+    padding-right: 15px;
+    text-align: center;
+    justify-content: center;
+}
+
+/* Mostrar solo iconos en el sidebar colapsado, ocultando el texto */
+.sidebar-collapse .nav-sidebar .nav-link p {
+    display: none;
+    opacity: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+/* Hacer los iconos visibles y centrados */
+.sidebar-collapse .nav-sidebar .nav-link .nav-icon {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* Elemento activo en azul */
+.nav-sidebar .nav-link.active {
+    background-color: #007bff !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Submenu elemento activo con estilo distintivo */
+.nav-sidebar .nav-treeview .nav-link.active {
+    background-color: rgba(0, 123, 255, 0.2) !important;
+    color: #007bff !important;
+    font-weight: bold;
+}
+
+/* Menú padre que contiene un elemento activo */
+.nav-sidebar .nav-item.menu-open > .nav-link {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+/* Forzar menús abiertos a permanecer abiertos */
+.nav-sidebar .nav-item.menu-open > .nav-treeview,
+.nav-sidebar .nav-item.menu-is-opening > .nav-treeview {
+    display: block !important;
+    max-height: 1000px !important;
+    overflow: visible !important;
+    height: auto !important;
+}
+
+/* Importante: este selector fuerza menús abiertos */
+.nav-sidebar .nav-item.menu-open {
+    overflow: visible !important;
+    height: auto !important;
+}
+
+/* Evitar que el sidebar se cierre al hacer clic en elementos */
+.nav-sidebar .nav-link:focus {
+    outline: none;
+}
+
+/* Ajustes para RTL */
+.sidebar-mini.sidebar-collapse.layout-fixed .main-sidebar:hover .brand-text, 
+.sidebar-mini.sidebar-collapse.layout-fixed .main-sidebar.sidebar-focused .brand-text {
+    margin-right: 0 !important;
+}
+
+/* Cambiar cursor al pasar sobre menús */
+.nav-sidebar .nav-link {
+    cursor: pointer;
+}
+
+/* Hacer que los submenús sean más visibles */
+.nav-sidebar .nav-treeview {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    padding-right: 10px;
+    transition: all 0.3s;
+}
+
+/* Añadir indicador visual para menús desplegables */
+.nav-sidebar .nav-item.has-treeview > .nav-link:after {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 15px;
+    top: 18px;
+}
+
+/* Añadir marcador visual para menús abiertos (flecha hacia abajo) */
+.nav-sidebar .nav-item.menu-open > .nav-link:after {
+    transform: rotate(-135deg);
+    top: 20px;
+}
+
+/* No cerrar menús al hacer clic - regla !important */
+.nav-sidebar .menu-open > .nav-treeview {
+    display: block !important;
+}
+
+/* Forzar visibilidad de submenús en menús abiertos */
+.main-sidebar .nav-sidebar .nav-item.menu-open > .nav-treeview {
+    height: auto !important;
+    max-height: 2000px !important;
+    transition: max-height 0.5s ease-in-out;
+}
+
+/* Ajuste específico para dispositivos móviles */
+@media (max-width: 767.98px) {
+    .nav-sidebar .nav-item.menu-open > .nav-treeview {
+        display: block !important;
+    }
+}
+
+/* Ajuste específico para modo RTL */
+.layout-fixed.text-sm .wrapper .sidebar .nav-flat .nav-link, 
+.layout-fixed.text-sm .wrapper .sidebar .nav-flat.nav-legacy .nav-link {
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+}

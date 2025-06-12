@@ -1,0 +1,54 @@
+/* 
+ * تحسين ظهور العناصر النشطة في القائمة الجانبية
+ * Mejora de la visualización de elementos activos en el menú lateral
+ */
+
+/* تنسيق العناصر النشطة الرئيسية والفرعية */
+.nav-sidebar .nav-link.active,
+.nav-sidebar .nav-treeview .nav-link.active,
+.nav-sidebar .menu-open > .nav-link,
+.nav-sidebar .nav-item.menu-open > .nav-link {
+    background-color: #007bff !important;
+    color: white !important;
+    font-weight: bold !important;
+    border-radius: 4px !important;
+}
+
+/* تنسيق العناصر الفرعية النشطة بشكل خاص */
+.nav-sidebar .nav-treeview .nav-link.active {
+    background-color: #007bff !important;
+    color: white !important;
+    font-weight: bold !important;
+    padding-right: 10px !important;
+    margin-right: 5px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+}
+
+/* تنسيق العناصر الأبوية التي تحتوي على عناصر نشطة */
+.nav-sidebar .nav-link.parent-active {
+    background-color: rgba(0, 123, 255, 0.15) !important;
+    color: #007bff !important;
+    font-weight: bold !important;
+}
+
+/* تأثير تحويم لتحسين تجربة المستخدم */
+.nav-sidebar .nav-link:hover:not(.active):not(.parent-active) {
+    background-color: rgba(0, 123, 255, 0.1) !important;
+    color: #343a40 !important;
+}
+
+/* تأكيد ظهور العناصر الفرعية عند فتح القائمة */
+.nav-sidebar .menu-open > .nav-treeview {
+    display: block !important;
+}
+
+/* تحسين ظهور المؤشر عند تحويم الماوس */
+.nav-sidebar .nav-link {
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+/* زيادة البروز للعناصر الفرعية عند تحويم الماوس */
+.nav-sidebar .nav-treeview .nav-link:hover {
+    padding-right: 32px !important;
+}

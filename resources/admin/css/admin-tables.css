@@ -1,0 +1,110 @@
+/**
+ * تنسيقات خاصة بجداول لوحة التحكم
+ * لتحسين المظهر والمحاذاة
+ */
+
+/* تنسيق الجداول بشكل عام */
+.table {
+    direction: rtl;
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: middle;
+    border-collapse: collapse;
+}
+
+/* تنسيق رؤوس الجداول */
+.table thead th {
+    text-align: right !important;
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #495057;
+    padding: 0.75rem;
+    white-space: nowrap;
+}
+
+/* تنسيق خلايا الجدول */
+.table td {
+    text-align: right !important;
+    vertical-align: middle;
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+/* تنسيق الصفوف عند المرور عليها */
+.table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* تنسيق زر التعديل */
+.table .btn-edit {
+    color: #007bff;
+    margin: 0 3px;
+}
+
+/* تنسيق زر الحذف */
+.table .btn-delete {
+    color: #dc3545;
+    margin: 0 3px;
+}
+
+/* تنسيق الجدول للأجهزة الصغيرة */
+@media (max-width: 767.98px) {
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* إضافة مسافة أكبر بين الخلايا على الأجهزة الصغيرة */
+    .table td, .table th {
+        padding: 0.5rem;
+    }
+}
+
+/* تنسيق زر إضافة عنصر جديد */
+.btn-add-new {
+    margin-bottom: 1rem;
+}
+
+/* تنسيق عنوان القسم */
+.content-header h1 {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #343a40;
+}
+
+/* تحسين مظهر أزرار العمليات */
+.table .action-buttons {
+    white-space: nowrap;
+    text-align: center !important;
+}
+
+/* تنسيق العناصر المُعطلة */
+.table .inactive {
+    opacity: 0.6;
+}
+
+/* تنسيق الصفوف الفردية والزوجية للتمييز بينهما */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* إضافة حدود للجدول */
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #dee2e6;
+}
+
+/* تنسيق صورة المستخدم في الجدول */
+.table .user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+}

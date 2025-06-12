@@ -1,0 +1,97 @@
+/* Estilos específicos para el sidebar móvil */
+
+/* Mejoras para el botón de toggle del sidebar */
+#sidebarToggleBtn,
+.nav-link[data-widget="pushmenu"] {
+    position: relative;
+    z-index: 1050; /* Superior a otros elementos */
+    cursor: pointer !important;
+    user-select: none;
+    outline: none;
+}
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 991.98px) {
+    #sidebarToggleBtn,
+    .nav-link[data-widget="pushmenu"] {
+        padding: 0.6rem 0.9rem !important;
+        margin: 0.3rem 0.5rem !important;
+        background-color: #007bff !important; /* Azul para mejor visibilidad */
+        color: white !important;
+        border-radius: 4px !important;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: all 0.2s ease !important;
+        min-width: 42px !important;
+        min-height: 42px !important;
+        touch-action: manipulation !important; /* Optimización para touch */
+    }
+    
+    #sidebarToggleBtn:hover,
+    #sidebarToggleBtn:focus,
+    .nav-link[data-widget="pushmenu"]:hover,
+    .nav-link[data-widget="pushmenu"]:focus {
+        background-color: #0069d9 !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 3px 7px rgba(0,0,0,0.3) !important;
+    }
+    
+    #sidebarToggleBtn i,
+    .nav-link[data-widget="pushmenu"] i {
+        font-size: 1.25rem !important;
+        pointer-events: none !important; /* Evitar problemas de propagación */
+    }
+    
+    /* Asegurar que el sidebar tenga el z-index correcto */
+    .main-sidebar {
+        z-index: 1049 !important; /* Justo debajo del botón toggle */
+    }
+    
+    /* Forzar visibilidad del ícono de hamburguesa */
+    .fa-bars {
+        display: inline-block !important;
+        visibility: visible !important;
+    }
+    
+    /* Mejoras al abrir el sidebar */
+    body.sidebar-open .wrapper::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1048;
+    }
+    
+    /* Asegurar que el sidebar aparezca completamente */
+    body.sidebar-open .main-sidebar {
+        transform: translateX(0) !important;
+        display: block !important;
+        width: 250px !important;
+    }
+    
+    /* Ajustar animación del sidebar */
+    .main-sidebar {
+        transition: transform 0.3s ease-in-out, width 0.3s ease-in-out !important;
+    }
+    
+    /* Centrar íconos cuando el sidebar está colapsado */
+    .sidebar-collapse .nav-sidebar .nav-link .nav-icon {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+    
+    /* Mejorar contraste de elementos activos */
+    .nav-sidebar .nav-item.active > .nav-link,
+    .nav-sidebar .nav-link.active {
+        background-color: #007bff !important;
+        color: #fff !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2) !important;
+    }
+}

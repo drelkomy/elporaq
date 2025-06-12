@@ -1,0 +1,65 @@
+/* 
+ * إصلاح للشريط الجانبي - إخفاء كامل بدلاً من التصغير
+ * Fix para la barra lateral - ocultamiento completo en lugar de minimizar
+ */
+
+/* إخفاء الشريط الجانبي بالكامل عند طي القائمة */
+body.sidebar-collapse .main-sidebar,
+body.sidebar-collapse .main-sidebar::before {
+    margin-right: -280px !important;
+    margin-left: -280px !important;
+}
+
+/* إعادة ضبط الهوامش للمحتوى */
+body.sidebar-collapse .content-wrapper, 
+body.sidebar-collapse .main-header, 
+body.sidebar-collapse .main-footer {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+/* دعم الـ RTL والـ LTR */
+[dir="rtl"] body.sidebar-collapse .content-wrapper, 
+[dir="rtl"] body.sidebar-collapse .main-header, 
+[dir="rtl"] body.sidebar-collapse .main-footer {
+    margin-right: 0 !important;
+}
+
+[dir="ltr"] body.sidebar-collapse .content-wrapper, 
+[dir="ltr"] body.sidebar-collapse .main-header, 
+[dir="ltr"] body.sidebar-collapse .main-footer {
+    margin-left: 0 !important;
+}
+
+/* إضافة انتقالات سلسة للحركة */
+.main-sidebar, 
+.main-sidebar::before, 
+.content-wrapper, 
+.main-header, 
+.main-footer {
+    transition: margin .3s ease-in-out;
+}
+
+/* التأكد من عدم ظهور أيقونات مصغرة */
+body.sidebar-collapse .nav-sidebar .nav-link i,
+body.sidebar-collapse .nav-sidebar .nav-item {
+    visibility: hidden !important;
+}
+
+/* إضافة خلفية مظللة في الجوال عند فتح القائمة */
+@media (max-width: 991.98px) {
+    body:not(.sidebar-collapse) .wrapper::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1031;
+    }
+    
+    .main-sidebar {
+        z-index: 1032 !important;
+    }
+}

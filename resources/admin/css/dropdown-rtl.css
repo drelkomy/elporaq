@@ -1,0 +1,104 @@
+/**
+ * Mejoras para la visualización de menús desplegables en RTL
+ * Compatibilidad con AdminLTE y Bootstrap
+ */
+
+/* Ajustes generales para menús desplegables RTL */
+.dropdown-menu-right {
+    right: 0;
+    left: auto !important;
+    text-align: right;
+}
+
+/* Mejora de apariencia para los elementos del menú desplegable */
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    transition: all 0.2s ease;
+}
+
+/* Mostrar iconos con margen a la izquierda */
+.dropdown-item i {
+    margin-left: 10px;
+    font-size: 1.1rem;
+    color: #6c757d;
+    width: 20px;
+    text-align: center;
+}
+
+/* Efecto hover para elementos del menú */
+.dropdown-item:hover, 
+.dropdown-item:focus {
+    background-color: rgba(0, 123, 255, 0.1);
+    color: #007bff;
+}
+
+.dropdown-item:hover i, 
+.dropdown-item:focus i {
+    color: #007bff;
+}
+
+/* Estilo para el botón desplegable */
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: right;
+}
+
+/* Forzar botón a ser responsive */
+.btn-outline-secondary.dropdown-toggle {
+    color: #6c757d;
+    border-color: #ced4da;
+    background-color: #fff;
+}
+
+.btn-outline-secondary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border-color: #80bdff;
+}
+
+/* Asegurar que el menú desplegable tenga scroll si hay muchos elementos */
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* Ajustes para el modo RTL */
+.dropdown-toggle::after {
+    margin-right: 0.255em;
+    margin-left: 0;
+}
+
+/* Hacer la flecha desplegable más visible */
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-right: 0.255em;
+    vertical-align: middle;
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-left: 0.3em solid transparent;
+}
+
+/* Estilos para el dropdown toggle en estado activo */
+.dropdown-toggle.show {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+/* Asegurarse que la capa flotante no se corta en el móvil */
+@media (max-width: 576px) {
+    .dropdown-menu {
+        position: absolute;
+        width: 100%;
+        max-height: 250px;
+    }
+    
+    .dropdown-toggle {
+        width: 100%;
+    }
+}

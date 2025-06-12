@@ -1,0 +1,365 @@
+/**
+ * تنسيقات خاصة بالواجهة العربية (RTL)
+ * لتحسين شكل وأداء الشريط الجانبي
+ */
+
+/* محاذاة جميع عناصر القائمة لليمين */
+.nav-sidebar .nav-item {
+    text-align: right !important;
+}
+
+.nav-sidebar .nav-link {
+    padding-right: 1rem !important;
+    direction: rtl !important;
+}
+
+/* إضافة مسافة للأيقونات وضبط اتجاهها */
+.nav-sidebar .nav-link i, 
+.nav-sidebar .nav-link svg {
+    margin-left: 0.5rem !important;
+    margin-right: 0 !important;
+    float: right !important;
+}
+
+/* محاذاة أسهم القوائم الفرعية */
+.nav-sidebar .nav-link .right {
+    position: absolute;
+    left: 1rem;
+    right: auto !important;
+    transform: rotate(180deg); /* تدوير السهم ليشير للاتجاه الصحيح */
+}
+
+/* تحسين مظهر القوائم الفرعية */
+.nav-sidebar .nav-treeview {
+    padding-right: 1rem !important;
+    padding-left: 0 !important;
+}
+
+/* تحسين نمط العناصر في القائمة */
+.nav-sidebar .nav-link {
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    font-weight: 600;
+    margin: 2px 0;
+}
+
+.nav-sidebar .nav-link:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* تحسين مظهر العنصر النشط - جعله بارزاً باللون الأزرق */
+.nav-sidebar .nav-link.active {
+    background-color: #007bff !important;
+    color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    position: relative;
+}
+
+.nav-sidebar .nav-link.active::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: #0056b3;
+}
+
+.nav-sidebar .nav-treeview .nav-link.active {
+    background-color: #007bff !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* تحسين مظهر العنصر الأب النشط */
+.nav-sidebar .nav-item.menu-open > .nav-link {
+    background-color: rgba(0, 123, 255, 0.15) !important;
+    color: #007bff !important;
+    font-weight: bold;
+}
+
+/* تعديلات للشريط المصغر (عند طيه) */
+.sidebar-mini.sidebar-collapse .main-sidebar:hover .nav-sidebar .nav-link {
+    padding-right: 1rem !important;
+    text-align: right !important;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar:not(:hover) .nav-sidebar > .nav-item > .nav-link > span {
+    display: none !important;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar:not(:hover) .nav-sidebar > .nav-item > .nav-link > i,
+.sidebar-mini.sidebar-collapse .main-sidebar:not(:hover) .nav-sidebar > .nav-item > .nav-link > svg {
+    margin: 0 !important;
+    float: none !important;
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+}
+
+/* تحسين مظهر الشريط الجانبي بشكل عام */
+.main-sidebar {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* تحسين مسافات العناصر */
+.nav-sidebar {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* إزالة الحواف الزائدة */
+.nav-sidebar .nav-item {
+    border: none !important;
+}
+
+/* تحسين تباعد العناصر */
+.nav-sidebar > .nav-item {
+    margin-bottom: 5px;
+}
+
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.custom-pagination a,
+.custom-pagination span {
+    margin: 0 5px;
+    padding: 8px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.custom-pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.custom-pagination .active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.custom-pagination .disabled {
+    color: #ccc;
+    border-color: #ccc;
+}
+
+/* Estilos base para el sidebar */
+.main-sidebar {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1040; /* Mayor z-index para que esté por encima del contenido */
+    transition: all 0.3s ease-in-out; /* Transición suave para todos los cambios */
+    width: 250px; /* Ancho predeterminado */
+    background-color: #ffffff; /* Color de fondo blanco */
+}
+
+/* Mejoras para el contenido del sidebar */
+.main-sidebar .nav-link {
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin: 2px 10px;
+    transition: all 0.2s;
+    color: #343a40; /* Color oscuro para el texto */
+}
+
+.main-sidebar .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Gris muy claro al pasar el mouse */
+    color: #007bff; /* Color azul al pasar el mouse */
+}
+
+.main-sidebar .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Estilos adicionales para elementos activos */
+.nav-sidebar .nav-treeview > .nav-item > .nav-link.active {
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+.nav-sidebar .nav-item.menu-open > .nav-link {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* Estilo para íconos */
+.main-sidebar .nav-link i.nav-icon {
+    color: #6c757d;
+    margin-left: 0.2rem;
+}
+
+.main-sidebar .nav-link:hover i.nav-icon {
+    color: #007bff;
+}
+
+/* Estilo para los íconos de flecha */
+.main-sidebar .nav-link .fa-angle-left {
+    transition: transform 0.3s ease;
+}
+
+.menu-open > a > p > .fa-angle-left {
+    transform: rotate(-90deg);
+}
+
+/* Ajuste del contenido principal cuando el sidebar cambia */
+.content-wrapper {
+    transition: margin-right 0.3s ease-in-out;
+}
+
+/* Estilos para pantallas grandes (escritorio) */
+@media (min-width: 992px) {
+    .sidebar-mini.sidebar-collapse .nav-sidebar > .nav-item {
+        padding: 0;
+        margin: 0;
+        text-align: center;
+    }
+    
+    /* Centrar iconos cuando el sidebar está colapsado */
+    .sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-item > .nav-link i.nav-icon {
+        margin: 0 auto;
+        display: block;
+        font-size: 1.1rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Ocultar flechas y ajustar espacios en modo colapsado */
+    .sidebar-mini.sidebar-collapse .main-sidebar .nav-link .right {
+        display: none;
+    }
+    
+    /* Ajustes específicos para RTL (árabe) */
+    [dir="rtl"].sidebar-mini.sidebar-collapse .main-sidebar {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    
+    [dir="rtl"].sidebar-mini.sidebar-collapse .main-sidebar .nav-sidebar .nav-link {
+        padding-right: 0;
+        padding-left: 0;
+    }
+    
+    .sidebar-mini.sidebar-collapse .main-sidebar {
+        width: 4.6rem !important;
+    }
+    
+    .sidebar-mini.sidebar-collapse .content-wrapper {
+        margin-right: 4.6rem !important;
+    }
+}
+
+/* Estilos para el botón de menú en móviles */
+@media (max-width: 991.98px) {
+    .main-header .navbar-nav .nav-item .nav-link[data-widget="pushmenu"] {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Estilos para el botón de menú en móviles */
+#sidebarToggleBtn {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1050;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+#sidebarToggleBtn:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 991.98px) {
+    #sidebarToggleBtn {
+        display: block; /* Visible en móviles */
+    }
+
+    .sidebar-open .main-sidebar {
+        transform: translateX(0);
+    }
+
+    .main-sidebar {
+        transform: translateX(100%);
+    }
+}
+
+/* Estilos para el botón de menú en la barra de navegación */
+.nav-link[data-widget="pushmenu"] {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 0.5rem 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link[data-widget="pushmenu"]:hover {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+}
+
+.nav-link[data-widget="pushmenu"] i {
+    color: #343a40;
+}
+
+/* Ajustes para el botón de menú en móviles */
+@media (max-width: 991.98px) {
+    .nav-link[data-widget="pushmenu"] {
+        width: 42px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-left: 10px;
+    }
+}
+
+/* Estilos para el botón de la barra lateral en móviles */
+@media (max-width: 991.98px) {
+    #sidebarToggleBtn,
+    .nav-link[data-widget="pushmenu"] {
+        padding: 0.6rem 0.9rem !important;
+        margin: 0.3rem 0.5rem !important;
+        border-radius: 8px !important;
+        font-size: 1.2rem !important;
+    }
+}
+
+/* Estilos personalizados para AdminLTE RTL */
+.sidebar-mini.sidebar-collapse .nav-sidebar .nav-link p {
+    margin-right: 0 !important;
+    opacity: 0;
+    width: 0;
+    transition: opacity 0.2s, width 0.2s;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar:hover .nav-sidebar .nav-link p {
+    opacity: 1;
+    width: auto;
+    margin-right: 0.5rem !important;
+}

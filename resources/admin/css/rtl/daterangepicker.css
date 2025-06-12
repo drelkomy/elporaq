@@ -1,0 +1,70 @@
+/* Date Range Picker RTL styles */
+.daterangepicker {
+    direction: rtl;
+    text-align: right;
+}
+
+.daterangepicker .calendar-table th,
+.daterangepicker .calendar-table td {
+    text-align: center;
+}
+
+.daterangepicker .drp-buttons {
+    text-align: left;
+}
+
+.daterangepicker .drp-buttons .btn {
+    margin-right: 8px;
+    margin-left: 0;
+}
+
+.daterangepicker .ranges {
+    text-align: right;
+    float: right;
+}
+
+.daterangepicker.show-ranges .drp-calendar.left {
+    border-right: 0;
+    border-left: 1px solid #ddd;
+}
+
+.daterangepicker .ranges li {
+    padding: 6px 8px;
+    text-align: right;
+}
+
+/* Fix for calendar placement */
+.daterangepicker.ltr .calendar.left {
+    clear: left;
+}
+
+.daterangepicker.rtl .calendar.right {
+    clear: right;
+}
+
+/* Fix for date input fields */
+.daterangepicker .drp-calendar.right .calendar-table {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.daterangepicker .drp-calendar.left .calendar-table {
+    border-right: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+/* RTL month navigation icons */
+.daterangepicker .prev {
+    transform: rotate(180deg);
+}
+
+.daterangepicker .next {
+    transform: rotate(180deg);
+}
+
+/* Alignment for the inputs */
+.daterangepicker .drp-calendar .calendar-time select {
+    text-align: right;
+}
