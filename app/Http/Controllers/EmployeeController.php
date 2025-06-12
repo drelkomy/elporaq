@@ -14,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::all();
+        $employees = Employee::paginate(10); // عرض 10 موظفين في كل صفحة
         return view('employees.index', compact('employees'));
     }
 public function update(Request $request, Employee $employee)

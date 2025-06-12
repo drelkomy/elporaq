@@ -9,7 +9,7 @@ class InvestmentCategoryController extends Controller
 {
     public function index()
     {
-        $categories = InvestmentCategory::all();
+        $categories = InvestmentCategory::paginate(10); // عرض 10 تصنيفات في كل صفحة
         return view('investment-categories.index', compact('categories'));
     }
 

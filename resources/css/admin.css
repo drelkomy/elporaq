@@ -1,0 +1,181 @@
+/* Import AdminLTE */
+@import 'admin-lte/dist/css/adminlte.min.css';
+
+/* Global Responsive Fixes */
+* {
+    box-sizing: border-box;
+}
+
+img,
+video,
+embed,
+iframe,
+object,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ===================================================================
+   FINAL RESPONSIVE & RTL FIXES (V3)
+=================================================================== */
+
+/* --- 1. General Layout & Navbar Overlap Fix --- */
+.main-header {
+    z-index: 1035; /* Higher than content-wrapper (1030) to show dropdowns */
+}
+
+.content-wrapper {
+    padding-top: 70px; /* Prevent navbar overlap */
+}
+
+/* --- Definitive Margin Fix --- */
+/* Transition should be on the elements themselves */
+html[dir="rtl"] .content-wrapper,
+html[dir="rtl"] .main-header,
+html[dir="rtl"] .main-footer {
+    transition: margin-right .3s ease-in-out, margin-left .3s ease-in-out;
+}
+
+/* Default state (sidebar open) */
+html[dir="rtl"] body:not(.sidebar-collapse) .content-wrapper,
+html[dir="rtl"] body:not(.sidebar-collapse) .main-header,
+html[dir="rtl"] body:not(.sidebar-collapse) .main-footer {
+    margin-right: 250px;
+    margin-left: 0 !important; /* Force remove left margin */
+}
+
+/* Collapsed state (sidebar closed) */
+html[dir="rtl"] body.sidebar-collapse .content-wrapper,
+html[dir="rtl"] body.sidebar-collapse .main-header,
+html[dir="rtl"] body.sidebar-collapse .main-footer {
+    margin-right: 0;
+    margin-left: 0 !important; /* Force remove left margin */
+}
+
+/* --- 2. Sidebar Behavior --- */
+
+/* 2.1 General Sidebar Theme */
+.main-sidebar {
+    background-color: #ffffff !important; /* White background */
+}
+.main-sidebar .nav-link p,
+.main-sidebar .nav-link i {
+    color: #343a40 !important; /* Dark text for readability */
+}
+
+/* 2.2 Desktop Sidebar */
+@media (min-width: 992px) {
+    /* Position sidebar on the right for RTL */
+    html[dir="rtl"] .main-sidebar {
+        left: auto;
+        right: 0;
+    }
+    /* Move off-screen on collapse */
+    html[dir="rtl"] body.sidebar-collapse .main-sidebar {
+        transform: translateX(250px) !important;
+        box-shadow: none !important; /* Remove shadow on collapse */
+    }
+}
+
+/* 2.3 Mobile Sidebar: Slide in/out */
+@media (max-width: 991.98px) {
+    html[dir="rtl"] .main-sidebar {
+        width: 250px !important;
+        min-width: 200px !important;
+        max-width: 90vw !important;
+    }
+    html[dir="rtl"] .content-wrapper {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+        padding: 10px 2vw 30px 2vw !important;
+        box-sizing: border-box;
+    }
+    .main-header, .main-footer {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100vw !important;
+    }
+}
+
+/* --- 3. Sidebar Item Alignment --- */
+.nav-sidebar > .nav-item > .nav-link > .right {
+    position: absolute;
+    right: auto;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform .3s ease-in-out;
+}
+
+.nav-sidebar > .nav-item.menu-open > .nav-link > .right {
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.nav-sidebar .nav-link { display: flex; align-items: center; justify-content: flex-start; }
+.nav-sidebar .nav-link .nav-icon { order: 1; }
+.nav-sidebar .nav-link p { order: 2; margin-right: 0.5rem; }
+.nav-treeview .nav-link { padding-right: 2rem; }
+
+
+/* --- 4. Definitive Table Responsiveness Fix --- */
+
+/* 4.1: Make table containers scrollable on mobile */
+@media (max-width: 767.98px) {
+    .table-responsive,
+    .card-body {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        width: 100% !important;
+        display: block !important;
+    }
+    table.table {
+        min-width: 600px !important;
+        width: 100% !important;
+        display: block !important;
+    }
+    .table th, .table td {
+        white-space: nowrap !important;
+        font-size: 13px !important;
+        padding: 6px 8px !important;
+    }
+}
+
+/* 4.2: Set base styles for all table cells */
+.table td,
+.table th {
+    vertical-align: middle !important;
+    text-align: right !important; /* Ensure RTL text alignment */
+}
+
+/* 4.3: Prevent headers and buttons from wrapping */
+.table th,
+.table .btn {
+    white-space: nowrap;
+}
+
+/* 4.4: Allow data cells to wrap, especially long URLs */
+.table td {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* ===================================================================
+   FINAL MOBILE FIXES
+=================================================================== */
+@media (max-width: 991.98px) {
+    /* Force full width for content and header on mobile */
+    html[dir="rtl"] .content-wrapper,
+    html[dir="rtl"] .main-header {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+
+    /* Fix user dropdown menu in navbar */
+    .main-header .dropdown-menu {
+        left: 0 !important;
+        right: auto !important;
+        width: 100%;
+    }
+}

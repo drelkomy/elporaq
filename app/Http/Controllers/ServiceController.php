@@ -8,7 +8,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::all();
+        $services = Service::paginate(10); // عرض 10 خدمات في كل صفحة
         return view('services.index', compact('services'));
     }
 

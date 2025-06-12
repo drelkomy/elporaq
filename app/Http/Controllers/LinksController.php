@@ -18,7 +18,7 @@ class LinksController extends Controller
                   ->orWhere('icon_name', 'like', "%{$search}%");
         }
     
-        $links = $query->get();
+        $links = $query->paginate(10); // عرض 10 روابط في كل صفحة
         return view('links.index', compact('links'));
     }
     

@@ -19,6 +19,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\BlockedIpController;
 
 use App\Http\Controllers\SitemapController;
 
@@ -32,7 +33,7 @@ Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
 Route::get('/', [SiteController::class, 'index'])->name('site.index');
 
 // لوحة التحكم
-Route::get('/dashboard', function () { return view('dashboard'); })
+Route::get('/dashboard', function () { return view('admin.board'); })
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -54,6 +55,7 @@ Route::get('/train', [SiteController::class, 'train'])->name('site.train');
 Route::post('trainings', [TrainingController::class, 'store'])->name('trainings.store');
 Route::post('/applications', [ApplicationController::class, 'store'])->name('applications.store');
 Route::post('appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+Route::patch('appointments/{appointment}/approve', [AppointmentController::class, 'approve'])->name('appointments.approve');
 
 // البحث في المدونة
 Route::get('/search', [BlogController::class, 'search'])->name('blogs.search');
@@ -126,6 +128,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // إدارة المستخدمين في لوحة التحكم
+    Route::prefix('admin')->name('admin.')->group(function () {
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    });
+});
+
+// Routes for blocked IP management
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('/blocked-ips', [BlockedIpController::class, 'index'])->name('blocked-ips.index');
+    Route::post('/blocked-ips', [BlockedIpController::class, 'store'])->name('blocked-ips.store');
+    Route::delete('/blocked-ips/{blockedIp}', [BlockedIpController::class, 'destroy'])->name('blocked-ips.destroy');
 });
 
 require __DIR__.'/auth.php';

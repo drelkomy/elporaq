@@ -40,7 +40,7 @@ class BlogController extends Controller
         $categories = Category::all();
         $tags = Tag::all();
 
-        return view('blogs.index', compact('blogs', 'categories', 'tags'));
+        return view('Blogs.index', compact('blogs', 'categories', 'tags'));
     }
 
     public function allBlogs(Request $request)
@@ -86,7 +86,7 @@ class BlogController extends Controller
         $blog->load('tags');
         $categories = Category::all();
         $tags = Tag::all();
-        return view('blogs.edit', [
+        return view('Blogs.edit', [
             'blog' => $blog,
             'categories' => $categories,
             'tags' => $tags,
@@ -105,7 +105,7 @@ class BlogController extends Controller
         $links = Link::all();
         $investmentCategories = InvestmentCategory::all();
         $services=Service::all();
-        return view('blogs.all', compact('blogs', 'categories', 'tags', 'recentPosts', 'links', 'investmentCategories','services'));
+        return view('Blogs.all', compact('blogs', 'categories', 'tags', 'recentPosts', 'links', 'investmentCategories','services'));
     }
 
     // البحث في التدوينات وعرض النتيجة
@@ -119,7 +119,7 @@ class BlogController extends Controller
         $links = Link::all();
         $investmentCategories = InvestmentCategory::all();
         $services=Service::all();
-        return view('blogs.index', compact('blogs', 'categories', 'tags', 'recentPosts', 'links', 'investmentCategories','services'));
+        return view('Blogs.index', compact('blogs', 'categories', 'tags', 'recentPosts', 'links', 'investmentCategories','services'));
     }
 
     // عرض نموذج إنشاء تدوينة جديدة
@@ -127,7 +127,7 @@ class BlogController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
-       return view('blogs.create', compact('categories', 'tags'));
+       return view('Blogs.create', compact('categories', 'tags'));
 
     }
 

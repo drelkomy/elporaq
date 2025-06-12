@@ -12,7 +12,7 @@ class ReviewController extends Controller
     // عرض قائمة المراجعات
     public function index()
     {
-        $reviews = Review::all();
+        $reviews = Review::paginate(6); // عرض 6 مراجعات في كل صفحة
         return view('reviews.index', compact('reviews'));
     }
 // تخزين مراجعة جديدة

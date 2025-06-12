@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('blocked_ips', function (Blueprint $table) {
             $table->id();
-            $table->string('service');
-            $table->date('date');
-            $table->string('name');
-            $table->string('tel');
-            $table->string('email');
-            $table->string('country');
-            $table->string('status')->default('pending');
+            $table->string('ip_address')->index();
+            $table->text('reason')->nullable();
+            $table->timestamp('blocked_until')->nullable(); // NULL means blocked indefinitely
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('blocked_ips');
     }
-};
+}; 

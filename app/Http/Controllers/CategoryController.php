@@ -10,7 +10,7 @@ class CategoryController extends Controller
     // عرض جميع الفئات
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10); // عرض 10 تصنيفات في كل صفحة
         return view('categories.index', compact('categories'));
     }
     

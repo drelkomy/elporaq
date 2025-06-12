@@ -157,7 +157,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('register') }}" class="nav-link">
+                            <a href="{{ route('admin.users.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>عرض المستخدمين</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.users.create') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-plus"></i>
                                 <p>إضافة مستخدم</p>
                             </a>
