@@ -152,8 +152,8 @@
                     </div>
                     <p>{{ $review->comment }}</p>
                 </div>
-                <div class="review-actions">
-                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editReviewModal{{ $review->id }}">
+                <div class="review-actions d-flex justify-content-end">
+                    <button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#editReviewModal{{ $review->id }}">
                         تعديل
                     </button>
 
@@ -210,14 +210,21 @@
                         </div>
                     </div>
 
-                    <form action="{{ route('reviews.destroy', $review) }}" method="POST" style="display:inline;">
+                    <form action="{{ route('reviews.destroy', $review) }}" method="POST" class="mx-1">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger m-2">حذف</button>
+                        <button type="submit" class="btn btn-danger">حذف</button>
                     </form>
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <!-- ترقيم الصفحات -->
+    <div class="mt-4">
+        @if(isset($reviews) && method_exists($reviews, 'links'))
+            {{ $reviews->links('components.admin-pagination') }}
+        @endif
     </div>
 
     @push('scripts')

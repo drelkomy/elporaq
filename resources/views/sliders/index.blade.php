@@ -57,10 +57,19 @@
                     <!-- Display image -->
                     <td><img src="{{ asset('/images/sliders/' . $slider->image_path) }}" alt="Slider Image" style="width: 150px; height: auto;"></td>
                     <td>
-                        <!-- Button to open modal for editing image -->
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editSliderModal{{ $slider->id }}">
-                            تعديل
-                        </button>
+                        <div class="d-flex">
+                            <!-- Button to open modal for editing image -->
+                            <button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#editSliderModal{{ $slider->id }}">
+                                تعديل
+                            </button>
+
+                            <!-- Form for deleting image -->
+                            <form action="{{ route('sliders.destroy', $slider) }}" method="POST" class="mx-1">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">حذف</button>
+                            </form>
+                        </div>
 
                         <!-- Modal for editing image -->
                         <div class="modal fade" id="editSliderModal{{ $slider->id }}" tabindex="-1" role="dialog" aria-labelledby="editSliderModalLabel{{ $slider->id }}" aria-hidden="true">
@@ -90,14 +99,6 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-
-                        <!-- Form for deleting image -->
-                        <form action="{{ route('sliders.destroy', $slider) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">حذف</button>
-                        </form>
                     </td>
                 </tr>
             @endforeach

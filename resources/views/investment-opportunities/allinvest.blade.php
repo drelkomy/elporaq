@@ -225,6 +225,24 @@
             </div>
     
             <!-- محتوى الفرص الاستثمارية -->
+    <style>
+        .position-relative {
+            overflow: hidden;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card:hover .overlay {
+            opacity: 1 !important;
+        }
+        .card-title:hover {
+            color: #FFAB00 !important;
+        }
+    </style>
             <div class="col-lg-9 p-4">
                 @if($opportunities->count())
                     <div class="row">
@@ -242,17 +260,46 @@
                                             {{ $opportunity->financial_indicators }}: نسبة العائد
                                         </div>
 
-                                        <!-- الأزرار عند التمرير -->
-                                        <div class="overlay d-flex align-items-center justify-content-center">
-                                            <a href="{{ route('investment-opportunities.show', $opportunity->id) }}" class="btn btn-info btn-sm mx-2">عرض التفاصيل</a>
-                                            <a href="{{ route('site.app') }}"  class="btn btn-primary btn-sm mx-2">طلب الخدمة</a>
+                                        <!-- الأزرار عند التمرير مع تأثير حركي -->
+                                        <div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background-color: rgba(18, 64, 118, 0.7); opacity: 0; transition: opacity 0.3s ease; border-radius: 5px 5px 0 0;">
+                                            <div>
+                                                <a href="{{ route('investment-opportunities.show', $opportunity->id) }}" class="btn btn-light btn-sm mx-1 mb-2 d-block">
+                                                    <i class="fas fa-eye me-1"></i> عرض التفاصيل
+                                                </a>
+                                                <a href="{{ route('site.app') }}" class="btn btn-warning btn-sm mx-1 d-block">
+                                                    <i class="fas fa-handshake me-1"></i> طلب الخدمة
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- العنوان أسفل الصورة -->
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title  rounded" style="font-family: Cairo;">
-                                            {{ Str::limit($opportunity->title,24) }}</h5>                                 
-                                       </div>
+                                    <div class="card-body d-flex flex-column">
+                                        <a href="{{ route('investment-opportunities.show', $opportunity->id) }}" class="text-decoration-none mb-2">
+                                            <h5 class="card-title rounded text-center" style="font-family: Cairo; color: #124076; font-weight: 600; transition: color 0.3s ease; height: 3rem; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                                                {{ $opportunity->title }}
+                                            </h5>
+                                        </a>
+                                        
+                                        <!-- تفاصيل إضافية -->
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <span class="badge bg-light text-dark" style="font-family: Cairo; font-size: 0.85rem;">
+                                                <i class="fas fa-chart-line me-1"></i> {{ $opportunity->investment_size ?? 'غير محدد' }}
+                                            </span>
+                                            
+                                            @if($opportunity->category)
+                                                <span class="badge" style="font-family: Cairo; font-size: 0.85rem; background-color: #FFAB00;">
+                                                    <i class="fas fa-tag me-1"></i> {{ $opportunity->category->name }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                        
+                                        <!-- أزرار بتصميم محسن -->
+                                        <div class="mt-auto text-center">
+                                            <a href="{{ route('investment-opportunities.show', $opportunity->id) }}" class="btn btn-sm btn-outline-primary w-100 mb-2">
+                                                <i class="fas fa-eye me-1"></i> عرض التفاصيل
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         @endforeach

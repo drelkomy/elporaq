@@ -16,6 +16,7 @@
     @if ($applications->isEmpty())
         <p>لا توجد طلبات لعرضها.</p>
     @else
+        <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -52,6 +53,7 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     @endif
 </div>
 @endsection

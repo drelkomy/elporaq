@@ -11,6 +11,7 @@
 
     <!-- عرض قائمة التدوينات -->
     @if($blogs->count() > 0)
+        <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -50,38 +51,14 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     @else
         <p>لا توجد تدوينات متاحة.</p>
     @endif
 </div>
 
-<!-- التصفح -->
-<div class="d-flex justify-content-between align-items-center my-3">
-    <div>
-        @if ($blogs->onFirstPage())
-            <span class="btn btn-secondary disabled">السابق</span>
-        @else
-            <a href="{{ $blogs->previousPageUrl() }}" class="btn btn-primary">السابق</a>
-        @endif
-    </div>
-
-    <div>
-        @for ($i = 1; $i <= $blogs->lastPage(); $i++)
-            @if ($i == $blogs->currentPage())
-                <span class="btn btn-secondary disabled">{{ $i }}</span>
-            @else
-                <a href="{{ $blogs->url($i) }}" class="btn btn-outline-primary">{{ $i }}</a>
-            @endif
-        @endfor
-    </div>
-
-    <div>
-        @if ($blogs->hasMorePages())
-            <a href="{{ $blogs->nextPageUrl() }}" class="btn btn-primary">التالي</a>
-        @else
-            <span class="btn btn-secondary disabled">التالي</span>
-        @endif
-    </div>
+<!-- التصفح باستخدام المكون القابل لإعادة الاستخدام -->
+<div class="my-3">
+    <x-admin-pagination :data="$blogs" />
 </div>
-<!-- التصفح نهاية -->
 @endsection

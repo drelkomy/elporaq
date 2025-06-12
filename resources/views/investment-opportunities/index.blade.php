@@ -58,27 +58,6 @@
         <p class="text-center">لا توجد فرص استثمارية.</p>
     @endif
 
-    <!-- التصفح -->
-    <div class="custom-pagination text-center">
-        @if ($opportunities->onFirstPage())
-            <span class="disabled">السابق</span>
-        @else
-            <a href="{{ $opportunities->previousPageUrl() }}" class="page-link">السابق</a>
-        @endif
-    
-        @for ($i = 1; $i <= $opportunities->lastPage(); $i++)
-            @if ($i == $opportunities->currentPage())
-                <span class="active">{{ $i }}</span>
-            @else
-                <a href="{{ $opportunities->url($i) }}" class="page-link">{{ $i }}</a>
-            @endif
-        @endfor
-    
-        @if ($opportunities->hasMorePages())
-            <a href="{{ $opportunities->nextPageUrl() }}" class="page-link">التالي</a>
-        @else
-            <span class="disabled">التالي</span>
-        @endif
-    </div>
-    <!-- التصفح نهاية -->
+    <!-- التصفح باستخدام المكون القابل لإعادة الاستخدام -->
+    <x-admin-pagination :data="$opportunities" />
 @endsection

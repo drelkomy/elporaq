@@ -117,23 +117,29 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
-
                                         <button type="submit" class="btn btn-primary">تحديث</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- نموذج الحذف -->
-                    <form action="{{ route('services.destroy', $service) }}" method="POST" style="display:inline;">
+                    
+                    <!-- زر لحذف الخدمة -->
+                    <form action="{{ route('services.destroy', $service->id) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">حذف</button>
+                        <button type="submit" class="btn btn-danger mx-1">حذف</button>
                     </form>
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <!-- ترقيم الصفحات -->
+    <div class="mt-3">
+        @if(isset($services) && method_exists($services, 'links'))
+            {{ $services->links('components.admin-pagination') }}
+        @endif
     </div>
 
     <!-- إضافة JQuery و Bootstrap JS لتفعيل النوافذ المنبثقة -->

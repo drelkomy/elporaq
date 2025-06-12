@@ -45,11 +45,20 @@
                         <td><a href="{{ $employee->instagram }}" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a></td>
                         <td><a href="{{ $employee->linkedin }}" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a></td>
                         <td>
-                            <!-- زر لتعديل بيانات الموظف -->
-                            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editEmployeeModal{{ $employee->id }}">
-                                تعديل
-                            </button>
+                            <div class="d-flex">
+                                <!-- زر لتعديل بيانات الموظف -->
+                                <button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#editEmployeeModal{{ $employee->id }}">
+                                    تعديل
+                                </button>
 
+                                <!-- نموذج الحذف -->
+                                <form action="{{ route('employees.destroy', $employee) }}" method="POST" class="mx-1">
+                                   @csrf
+                                   @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">حذف</button>
+                                </form>
+                            </div>
+                            
                             <!-- نافذة منبثقة لتعديل الموظف -->
                             <div class="modal fade" id="editEmployeeModal{{ $employee->id }}" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalLabel{{ $employee->id }}" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -121,18 +130,16 @@
                                 </div>
                             </div>
 
-                            <!-- نموذج الحذف -->
-                            <form action="{{ route('employees.destroy', $employee) }}" method="POST" style="display:inline;">
-   			 @csrf
-   			 @method('DELETE')
-    			<button type="submit" class="btn btn-danger m-2">حذف</button>
-			</form>
-
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <!-- ترقيم الصفحات -->
+        <div class="pagination-container mt-3 d-flex justify-content-center">
+            {{ $employees->onEachSide(1)->links() }}
+        </div>
 
         <!-- نافذة منبثقة لإضافة موظف جديد -->
         <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
@@ -208,24 +215,66 @@
 @section('styles')
 <style>
     .employee-card img {
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
         object-fit: cover;
         border-radius: 50%;
     }
-
-    .social-icon {
-        color: #333;
-        font-size: 1.2rem;
-        margin: 0 5px;
+    .employee-card td {
+        vertical-align: middle;
     }
-
-    .social-icon:hover {
-        color: #007bff;
-    }
-
     .image-cell {
+        width: 80px;
         text-align: center;
+    }
+    .link-icon {
+        font-size: 1.2rem;
+        margin: 0 3px;
+    }
+    .link-icon.disabled {
+        color: #ccc;
+    }
+    /* تنسيق لعناصر الترقيم */
+    .pagination-container {
+        margin-top: 20px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: center;
+    }
+    .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
     }
 </style>
 @endsection
+
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // التأكد من عمل النوافذ المنبثقة
+        $('.modal').modal({
+            show: false
+        });
+        
+        // إضافة معاينة الصورة المختارة
+        $('input[type="file"]').change(function(e) {
+            var input = e.target;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var preview = $(this).closest('.form-group').find('.image-preview');
+                
+                reader.onload = function(e) {
+                    if (preview.length) {
+                        preview.attr('src', e.target.result).show();
+                    }
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    });
+</script>
+@endpush

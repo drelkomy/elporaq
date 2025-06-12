@@ -66,7 +66,8 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <table class="table">
+    <div class="table-responsive">
+        <table class="table">
         <thead>
             <tr>
                 <th>اسم الرابط</th>
@@ -80,22 +81,32 @@
                     <td>{{ $link->link_name }}</td>
                     <td><i class="{{ $link->icon_name }}" style="color: {{ $link->icon_color }};"></i></td>
                     <td>
-                        <!-- زر لتعديل الرابط -->
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editLinkModal" data-id="{{ $link->id }}" data-name="{{ $link->link_name }}" data-icon="{{ $link->icon_name }}" data-color="{{ $link->icon_color }}">
-                            تعديل
-                        </button>
+                        <div class="d-flex">
+                            <!-- زر لتعديل الرابط -->
+                            <button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#editLinkModal" data-id="{{ $link->id }}" data-name="{{ $link->link_name }}" data-icon="{{ $link->icon_name }}" data-color="{{ $link->icon_color }}">
+                                تعديل
+                            </button>
 
-                        <!-- نموذج الحذف -->
-                        <form action="{{ route('links.destroy', $link) }}" method="POST" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا الرابط؟');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">حذف</button>
-                        </form>
+                            <!-- نموذج الحذف -->
+                            <form action="{{ route('links.destroy', $link) }}" method="POST" class="mx-1" onsubmit="return confirm('هل أنت متأكد من حذف هذا الرابط؟');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">حذف</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
-    </table>
+        </table>
+    </div>
+
+    <!-- ترقيم الصفحات -->
+    <div class="mt-3">
+        @if(isset($links) && method_exists($links, 'links'))
+            {{ $links->links('components.admin-pagination') }}
+        @endif
+    </div>
 
     <!-- نافذة منبثقة لتعديل الرابط -->
     <div class="modal fade" id="editLinkModal" tabindex="-1" role="dialog" aria-labelledby="editLinkModalLabel" aria-hidden="true">

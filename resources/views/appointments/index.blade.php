@@ -15,6 +15,7 @@
         </div>
     @endif
 
+    <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -25,6 +26,7 @@
                 <th>رقم الجوال</th>
                 <th>البريد الإلكتروني</th>
                 <th>الدولة</th>
+                <th>الحالة</th>
                 <th>الإجراءات</th>
             </tr>
         </thead>
@@ -39,6 +41,18 @@
                     <td>{{ $appointment->email }}</td>
                     <td>{{ $appointment->country }}</td>
                     <td>
+                        <span class="badge {{ $appointment->status == 'approved' ? 'bg-success' : 'bg-warning' }}">
+                            {{ $appointment->status == 'approved' ? 'تمت الموافقة' : 'قيد الانتظار' }}
+                        </span>
+                    </td>
+                    <td>
+                        @if($appointment->status != 'approved')
+                            <form action="{{ route('appointments.approve', $appointment->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button type="submit" class="btn btn-success">موافقة</button>
+                            </form>
+                        @endif
                         <form action="{{ route('appointments.destroy', $appointment->id) }}" method="POST" style="display: inline;">
                             @csrf
                             @method('DELETE')
@@ -49,30 +63,8 @@
             @endforeach
         </tbody>
     </table>
-
-    <!-- التصفح -->
-    <div class="pagination justify-content-center mt-4">
-        {{-- Previous Page Link --}}
-        @if ($appointments->onFirstPage())
-            <span class="page-link disabled">السابق</span>
-        @else
-            <a href="{{ $appointments->previousPageUrl() }}" class="page-link">السابق</a>
-        @endif
-
-        {{-- Pagination Links --}}
-        @for ($i = 1; $i <= $appointments->lastPage(); $i++)
-            @if ($i == $appointments->currentPage())
-                <span class="page-link active">{{ $i }}</span>
-            @else
-                <a href="{{ $appointments->url($i) }}" class="page-link">{{ $i }}</a>
-            @endif
-        @endfor
-
-        {{-- Next Page Link --}}
-        @if ($appointments->hasMorePages())
-            <a href="{{ $appointments->nextPageUrl() }}" class="page-link">التالي</a>
-        @else
-            <span class="page-link disabled">التالي</span>
-        @endif
     </div>
+
+    <!-- التصفح باستخدام المكون القابل لإعادة الاستخدام -->
+    <x-admin-pagination :data="$appointments" />
 @endsection

@@ -70,11 +70,20 @@
                     <td>{{ $statistic->statistic_name }}</td>
                     <td>{{ $statistic->count }}</td>
                     <td>
-                        <!-- زر تعديل -->
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editStatisticModal{{ $statistic->id }}">
-                            تعديل
-                        </button>
+                        <div class="d-flex">
+                            <!-- زر تعديل -->
+                            <button type="button" class="btn btn-warning mx-1" data-toggle="modal" data-target="#editStatisticModal{{ $statistic->id }}">
+                                تعديل
+                            </button>
 
+                            <!-- زر حذف -->
+                            <form action="{{ route('statistics.destroy', $statistic->id) }}" method="POST" class="mx-1">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">حذف</button>
+                            </form>
+                        </div>
+                        
                         <!-- نافذة منبثقة لتعديل إحصائية -->
                         <div class="modal fade" id="editStatisticModal{{ $statistic->id }}" tabindex="-1" role="dialog" aria-labelledby="editStatisticModalLabel{{ $statistic->id }}" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -112,13 +121,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- زر حذف -->
-                        <form action="{{ route('statistics.destroy', $statistic->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">حذف</button>
-                        </form>
                     </td>
                 </tr>
             @endforeach

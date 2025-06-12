@@ -3,134 +3,17 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <!-- نموذج إضافة تصنيف استثماري جديد -->
+        <!-- زر إضافة تصنيف استثماري جديد -->
         <div class="col-md-12 mb-4">
-            <h1>إضافة تصنيف استثماري جديد</h1>
-            <form action="{{ route('investment-categories.store') }}" method="POST">
-                @csrf
-
-                <!-- حقل الاسم -->
-                <div class="mb-3">
-                    <label for="name" class="form-label">اسم التصنيف</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+            <h1>تصنيفات الفرص الاستثمارية</h1>
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
                 </div>
-
-                <!-- قائمة منسدلة لاختيار القطاع -->
-                <div class="mb-3">
-                    <label for="sector">اختر الايقونة</label>
-                    <div id="icon-selection" class="icon-selection">
-                        <!-- قائمة الأيقونات -->
-                        <div class="icon" data-icon="fa-hospital">
-                            <i class="fas fa-hospital"></i>
-                            <p>مستشفى</p>
-                        </div>
-                        <div class="icon" data-icon="fa-store">
-                            <i class="fas fa-store"></i>
-                            <p>متجر</p>
-                        </div>
-                        <div class="icon" data-icon="fa-seedling">
-                            <i class="fas fa-seedling"></i>
-                            <p>نباتات</p>
-                        </div>
-                        <div class="icon" data-icon="fa-paw">
-                            <i class="fas fa-paw"></i>
-                            <p>حيواني</p>
-                        </div>
-                        <div class="icon" data-icon="fa-industry">
-                            <i class="fas fa-industry"></i>
-                            <p>صناعي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-leaf">
-                            <i class="fas fa-leaf"></i>
-                            <p>بيئي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-apple-alt">
-                            <i class="fas fa-apple-alt"></i>
-                            <p>غذائي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-graduation-cap">
-                            <i class="fas fa-graduation-cap"></i>
-                            <p>تعليمي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-theater-masks">
-                            <i class="fas fa-theater-masks"></i>
-                            <p>ترفيهي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-sun">
-                            <i class="fas fa-sun"></i>
-                            <p>سياحي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-shuttle-van">
-                            <i class="fas fa-shuttle-van"></i>
-                            <p>نقل</p>
-                        </div>
-                        <div class="icon" data-icon="fa-recycle">
-                            <i class="fas fa-recycle"></i>
-                            <p>إعادة تدوير</p>
-                        </div>
-                        <div class="icon" data-icon="fa-laptop-code">
-                            <i class="fas fa-laptop-code"></i>
-                            <p>تكنولوجي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-calendar-day">
-                            <i class="fas fa-calendar-day"></i>
-                            <p>تقويم</p>
-                        </div>
-                        <div class="icon" data-icon="fa-cogs">
-                            <i class="fas fa-cogs"></i>
-                            <p>إعدادات</p>
-                        </div>
-                        <div class="icon" data-icon="fa-truck">
-                            <i class="fas fa-truck"></i>
-                            <p>شاحنة</p>
-                        </div>
-                        <div class="icon" data-icon="fa-globe">
-                            <i class="fas fa-globe"></i>
-                            <p>عالمي</p>
-                        </div>
-                        <div class="icon" data-icon="fa-lightbulb">
-                            <i class="fas fa-lightbulb"></i>
-                            <p>إضاءة</p>
-                        </div>
-                        <div class="icon" data-icon="fa-wrench">
-                            <i class="fas fa-wrench"></i>
-                            <p>أداة</p>
-                        </div>
-                        <div class="icon" data-icon="fa-music">
-                            <i class="fas fa-music"></i>
-                            <p>موسيقى</p>
-                        </div>
-                        <div class="icon" data-icon="fa-video">
-                            <i class="fas fa-video"></i>
-                            <p>فيديو</p>
-                        </div>
-                        <div class="icon" data-icon="fa-camera">
-                            <i class="fas fa-camera"></i>
-                            <p>كاميرا</p>
-                        </div>
-                        <div class="icon" data-icon="fa-paint-brush">
-                            <i class="fas fa-paint-brush"></i>
-                            <p>رسم</p>
-                        </div>
-                        <div class="icon" data-icon="fa-dumbbell">
-                            <i class="fas fa-dumbbell"></i>
-                            <p>لياقة</p>
-                        </div>
-                    </div>
-                         
-                    <input type="hidden" id="selected-icon" name="sector" >
-                </div>
-                    @error('sector')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- زر الإرسال -->
-                <button type="submit" class="btn btn-primary">إضافة التصنيف</button>
-            </form>
+            @endif
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addCategoryModal">
+                <i class="fas fa-plus-circle ml-1"></i> إضافة تصنيف استثماري جديد
+            </button>
         </div>
 
         <!-- قائمة التصنيفات -->
@@ -163,20 +46,29 @@
                                 @endif
                             </td>
                             <td>
-                                <!-- زر تعديل -->
-                                <a href="{{ route('investment-categories.edit', $category->id) }}" class="btn btn-warning btn-sm">تعديل</a>
+                                <div class="d-flex">
+                                    <!-- زر تعديل -->
+                                    <a href="{{ route('investment-categories.edit', $category->id) }}" class="btn btn-warning btn-sm mx-1">تعديل</a>
 
-                                <!-- نموذج حذف -->
-                                <form action="{{ route('investment-categories.destroy', $category->id) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm">حذف</button>
-                                </form>
+                                    <!-- نموذج حذف -->
+                                    <form action="{{ route('investment-categories.destroy', $category->id) }}" method="POST" class="mx-1">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            
+            <!-- ترقيم الصفحات -->
+            <div class="mt-3">
+                @if(isset($categories) && method_exists($categories, 'links'))
+                    {{ $categories->links('components.admin-pagination') }}
+                @endif
+            </div>
         </div>
     </div>
 </div>
@@ -185,18 +77,144 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const dropdownItems = document.querySelectorAll('.dropdown-item');
-        const sectorInput = document.getElementById('sector');
+        const selectedIconInput = document.getElementById('selected-icon');
     
         dropdownItems.forEach(item => {
             item.addEventListener('click', function() {
-                // Update the selected value
-                sectorInput.value = this.getAttribute('data-icon');
-                // Update the button text
+                // Actualizar el valor seleccionado en el input oculto
+                selectedIconInput.value = this.getAttribute('data-icon');
+                
+                // Actualizar el texto del botón
                 const button = document.getElementById('dropdownMenuButton');
                 button.innerHTML = this.innerHTML;
-                button.appendChild(document.createElement('span')); // Fix for dropdown toggle style issue
+                
+                // Agregar el icono de flecha hacia abajo al botón
+                const caret = document.createElement('span');
+                caret.className = 'caret';
+                button.appendChild(caret);
             });
         });
     });
-    </script>
+</script>
+
+<!-- نافذة منبثقة لإضافة تصنيف استثماري جديد -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" role="dialog" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategoryModalLabel">إضافة تصنيف استثماري جديد</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('investment-categories.store') }}" method="POST" id="addCategoryForm">
+                    @csrf
+                    <!-- حقل الاسم -->
+                    <div class="mb-3">
+                        <label for="name" class="form-label">اسم التصنيف</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- قائمة منسدلة لاختيار القطاع -->
+                    <div class="mb-3">
+                        <label for="sector">اختر الايقونة</label>
+                        <div class="dropdown w-100">
+                            <button class="btn btn-outline-secondary dropdown-toggle w-100 text-right" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-icons ml-2"></i> اختر أيقونة
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right w-100" aria-labelledby="dropdownMenuButton">
+                                <!-- قائمة الأيقونات -->
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-hospital">
+                                    <i class="fas fa-hospital ml-2"></i> مستشفى
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-store">
+                                    <i class="fas fa-store ml-2"></i> متجر
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-seedling">
+                                    <i class="fas fa-seedling ml-2"></i> نباتات
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-paw">
+                                    <i class="fas fa-paw ml-2"></i> حيواني
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-industry">
+                                    <i class="fas fa-industry ml-2"></i> صناعي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-leaf">
+                                    <i class="fas fa-leaf ml-2"></i> بيئي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-apple-alt">
+                                    <i class="fas fa-apple-alt ml-2"></i> غذائي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-graduation-cap">
+                                    <i class="fas fa-graduation-cap ml-2"></i> تعليمي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-theater-masks">
+                                    <i class="fas fa-theater-masks ml-2"></i> ترفيهي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-sun">
+                                    <i class="fas fa-sun ml-2"></i> سياحي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-shuttle-van">
+                                    <i class="fas fa-shuttle-van ml-2"></i> نقل
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-recycle">
+                                    <i class="fas fa-recycle ml-2"></i> إعادة تدوير
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-laptop-code">
+                                    <i class="fas fa-laptop-code ml-2"></i> تكنولوجي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-calendar-day">
+                                    <i class="fas fa-calendar-day ml-2"></i> تقويم
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-cogs">
+                                    <i class="fas fa-cogs ml-2"></i> إعدادات
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-truck">
+                                    <i class="fas fa-truck ml-2"></i> شاحنة
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-globe">
+                                    <i class="fas fa-globe ml-2"></i> عالمي
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-lightbulb">
+                                    <i class="fas fa-lightbulb ml-2"></i> إضاءة
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-wrench">
+                                    <i class="fas fa-wrench ml-2"></i> أداة
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-music">
+                                    <i class="fas fa-music ml-2"></i> موسيقى
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-video">
+                                    <i class="fas fa-video ml-2"></i> فيديو
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-camera">
+                                    <i class="fas fa-camera ml-2"></i> كاميرا
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-paint-brush">
+                                    <i class="fas fa-paint-brush ml-2"></i> رسم
+                                </a>
+                                <a class="dropdown-item" href="javascript:void(0);" data-icon="fa-dumbbell">
+                                    <i class="fas fa-dumbbell ml-2"></i> لياقة
+                                </a>
+                            </div>
+                        </div>
+                        <input type="hidden" id="selected-icon" name="sector">
+                        @error('sector')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-primary" onclick="document.getElementById('addCategoryForm').submit();">إضافة التصنيف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
